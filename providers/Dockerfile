@@ -1,9 +1,10 @@
-FROM golang:1.25 AS build
+FROM golang:1.25-alpine AS builder
 WORKDIR /app
 COPY . .
-RUN go mod tidy && CGO_ENABLED=0 go build -o app main.go
+RUN go build -o app main.go
 
-FROM scratch
-COPY --from=build /app/app /app
-# The binary is static; we only need the binary
-ENTRYPOINT ["./app"]
+FROM alpine:latest
+RUN apk add --no-cache ca-certificates
+WORKDIR /app
+COPY --from=builder /app/app .
+CMD ["./app"]
