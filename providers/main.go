@@ -26,7 +26,7 @@ func initFirebaseApp() *firebase.App {
 
 	// Read JSON from env var
 	credsJSON := []byte(os.Getenv("FIREBASE_KEY"))
-	opt := option.WithCredentialsFile(string(credsJSON))
+	opt := option.WithCredentialsJSON(credsJSON)
 
 	app, err := firebase.NewApp(ctx, &firebase.Config{
 		ProjectID: "services-by-friends",
