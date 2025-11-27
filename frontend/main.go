@@ -4,23 +4,35 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html/v2"
 )
 
 func main() {
-	// Create a new Fiber app
-	app := fiber.New()
+	// Load HTML templates from ./templates directory
+	engine := html.New("./templates", ".html")
+
+	// Create a new Fiber app with template engine
+	app := fiber.New(fiber.Config{
+		Views: engine,
+	})
 
 	// Define routes
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to Services by Friends!")
+		return c.Render("index", fiber.Map{
+			"Title": "Services by Friends",
+		})
 	})
 
 	app.Get("/about", func(c *fiber.Ctx) error {
-		return c.SendString("About: A community of service providers.")
+		return c.Render("about", fiber.Map{
+			"Title": "About Us",
+		})
 	})
 
 	app.Get("/signup", func(c *fiber.Ctx) error {
-		return c.SendString("Signup page coming soon...")
+		return c.Render("signup", fiber.Map{
+			"Title": "Sign Up",
+		})
 	})
 
 	// Start server on port 8080
