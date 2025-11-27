@@ -27,7 +27,7 @@ func initFirebaseApp() *firebase.App {
 	// Read JSON from env var
 	credsJSON := []byte(os.Getenv("FIREBASE_KEY"))
 	opt := option.WithCredentialsFile(string(credsJSON))
-	
+
 	app, err := firebase.NewApp(ctx, &firebase.Config{
 		ProjectID: "services-by-friends",
 	}, opt)
@@ -107,6 +107,10 @@ func main() {
 		return c.JSON(fiber.Map{"id": docRef.ID})
 	})
 
-	log.Println("Providers API with Firestore running on http://localhost:8081")
-	log.Fatal(api.Listen(":8081"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8081" // fallback for local dev
+	}
+	log.Println("Providers API with Firestore running on http://localhost:" + port)
+	log.Fatal(api.Listen(":" + port))
 }
