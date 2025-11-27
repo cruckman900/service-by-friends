@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"log"
 	"os"
 	"time"
@@ -25,7 +26,11 @@ func initFirebaseApp() *firebase.App {
 	ctx := context.Background()
 
 	// Read JSON from env var
-	credsJSON := []byte(os.Getenv("FIREBASE_KEY"))
+	credsB64 := os.Getenv("FIREBASE_KEY_BASE64")
+	credsJSON, err := base64.StdEncoding.DecodeString(credsB64)
+	if err != nil {
+		log.Fatalf("failed to decode FIREBASE_KEY_BASE64: %v", err)
+	}
 	opt := option.WithCredentialsJSON(credsJSON)
 
 	app, err := firebase.NewApp(ctx, &firebase.Config{
