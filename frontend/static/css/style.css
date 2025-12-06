@@ -1,0 +1,127 @@
+/* Reset & base */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+header nav a:hover {
+  color: #ff9800;
+}
+
+/* Main layout */
+main {
+  display: flex;
+  min-height: 70vh;
+  margin: 1rem auto;
+  max-width: 1200px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative; /* anchor for sidebar positioning */
+}
+
+/* Sidebar */
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: #f0f0f0;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* Slide it off canvas but leave a sliver */
+.sidebar.collapsed {
+  transform: translateX(-220px); /* push most off screen */
+}
+
+/* Toggle button inside sidebar */
+.sidebar .toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.sidebar.collapsed .toggle-btn {
+  position: absolute;
+  left: 230px; /* position inside the sliver */
+  transition: left 0.3s ease;
+}
+
+.sidebar.collapsed #accordion {
+  display: none; /* hide accordion when collapsed */
+}
+
+/* Content area fills space */
+.content {
+  flex: 1;
+  margin-left: 250px; /* reserve space when sidebar is visible */
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+/* When sidebar is collapsed, content expands */
+.sidebar.collapsed .content {
+  margin-left: 30px; /* leave space for sliver + reopen button */
+}
+
+/* Accordion */
+#accordion h3 {
+  margin: 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+#accordion .accordion-content {
+  display: none; /* hidden by default */
+  padding: 0.5rem 1rem;
+}
+
+#accordion .accordion-content a {
+  display: block;
+  padding: 0.25rem 0;
+  color: #333;
+  text-decoration: none;
+}
+
+#accordion .accordion-content a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #777;
+}

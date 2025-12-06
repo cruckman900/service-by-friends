@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>{{.Title}}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services by Friends</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body>
-    <h1>Welcome to Services by Friends</h1>
-    <nav>
-      <a href="/">Home</a> | <a href="/about">About</a> |
-      <a href="/signup">Sign Up</a>
-    </nav>
-    <p>Discover unique services offered by our community of friends.</p>
+    <!-- Partials will be injected here -->
+    <div id="header"></div>
+    <main>
+      <div id="sidebar-container"></div>
+      <section id="content" class="content"></section>
+    </main>
+    <div id="footer"></div>
+
+    <!-- Scripts will be injected here -->
+    <script src="/static/js/app.js"></script>
   </body>
 </html>

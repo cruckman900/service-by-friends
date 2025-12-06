@@ -16,24 +16,15 @@ func main() {
 		Views: engine,
 	})
 
-	// Define routes
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("index", fiber.Map{
-			"Title": "Services by Friends",
-		})
-	})
+	// Serve static directories
+	app.Static("/templates", "./templates")
+	app.Static("/static", "./static")
+	app.Static("/data", "./data")
 
-	app.Get("/about", func(c *fiber.Ctx) error {
-		return c.Render("about", fiber.Map{
-			"Title": "About Us",
-		})
-	})
-
-	app.Get("/signup", func(c *fiber.Ctx) error {
-		return c.Render("signup", fiber.Map{
-			"Title": "Sign Up",
-		})
-	})
+    // Default route → index.html
+    app.Get("/", func(c *fiber.Ctx) error {
+        return c.SendFile("./templates/index.html")
+    })
 
 	// Start server on port 8080
 	log.Println("Frontend running on http://localhost:8080")

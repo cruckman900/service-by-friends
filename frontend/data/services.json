@@ -1,0 +1,23 @@
+{
+    "Tattooing": [
+        {
+            "name": "Robert Long",
+            "page": "tattooing.html",
+            "icon": "🎨"
+        }
+    ],
+    "Custom Guitars": [
+        {
+            "name": "Joe",
+            "page": "guitars.html",
+            "icon": "🎸"
+        }
+    ],
+    "Handyman": [
+        {
+            "name": "Jim",
+            "page": "handyman.html",
+            "icon": "🛠️"
+        }
+    ]
+}
